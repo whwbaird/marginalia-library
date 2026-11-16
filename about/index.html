@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>About · Marginalia Library</title>
+<meta name="description" content="How Marginalia Library was made.">
+<link rel="canonical" href="https://marginalia-library.com/about/">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/static/fonts/libre-caslon-text-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/style.css?v=a27beb78b7">
+<script src="/static/contact.js?v=a27beb78b7" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="site-head"><div class="wrap">
+<div class="brand"><a href="/">MARGINALIA LIBRARY</a><span>What Marginal Revolution has been reading since 2003</span></div>
+<nav class="site-nav" aria-label="Main"><a href="/catalog/">Catalog</a><a href="/browse/">Browse</a><a href="/authors/">Authors</a><a href="/date/">Years</a><a href="/patterns/">Patterns</a><a href="/random/">Surprise me</a><a href="/about/" aria-current="page">About</a></nav>
+</div></header>
+<div class="wrap"><form class="lookup" action="/browse/" method="get" role="search"><label for="q">LOOK UP</label><input id="q" name="q" type="search" placeholder="A title or an author" autocomplete="off"><button class="btn" type="submit">FIND</button></form></div>
+<main id="main" class="wrap">
+<div class="prose">
+<h1 class="page-title">About the catalog</h1>
+<p class="lede">Data from August 2003 to October 2026 · built 2026-11-16</p>
+<h2 id="what">What this is</h2>
+<p>Marginalia Library lists books mentioned on <a href="https://marginalrevolution.com/">Marginal Revolution</a>, the blog Tyler Cowen and Alex Tabarrok have written since 2003. It holds 7,952 works and 13,286 mentions of them, in 7,289 posts. Every work has a page with each of its mentions: the date, who wrote the post, MR&rsquo;s evaluation of the book, and the post&rsquo;s title, linked to the post itself.</p>
+<p>It is an independent project. It is not affiliated with Marginal Revolution, Tyler Cowen or Alex Tabarrok.</p>
+<h2 id="how">How it was made</h2>
+<p>Language models did the reading, and a person checked their work at each step.</p>
+<ol>
+<li><strong>Finding the mentions.</strong> OpenAI&rsquo;s GPT-6 Luna read every post on the blog, about 40,000 of them, and listed each book a post mentions, whether by title, by description or in passing. A second pass checked that each one was a specific book, and not, say, a film or an article. For posts outside MR&rsquo;s Books category, Anthropic&rsquo;s Claude Sonnet 5.5 did that check, and also reread the posts that looked like they discussed a book but had nothing listed.</li>
+<li><strong>Linking each mention to a work.</strong> Each mention was matched to a record in Open Library or Wikidata: by search where the match was clear, and with Claude Opus 5.5 choosing among the candidates where it wasn&rsquo;t. A work is a book, or a series, a collection, a play, or a sacred text. Translations and new editions are linked to the original work. About 2,000 links were checked by hand. About 700 mentions couldn&rsquo;t be tied to a specific work, and aren&rsquo;t listed.</li>
+<li><strong>Shelving.</strong> Claude Sonnet 5.5 shelved each work by form, subject, place and period, starting from its library subject headings.</li>
+<li><strong>Evaluating.</strong> Claude Sonnet 5.5 read each mention in its post and labeled whose view it is, what the view is, whether the post recommends the book, and whether the writer has read it. About 650 mentions were labeled or checked by hand, and the hand labels take precedence.</li>
+</ol>
+<p>Bibliographic details (titles, authors, first publication years) come from Open Library and Wikidata, with hand corrections. Some are surely wrong; the catalog is meant to be corrected over time.</p>
+<h2 id="evaluations">MR&rsquo;s evaluation of a book</h2>
+<p>Each mention is labeled with the view the post takes of the book. These labels are inferred from the post, and some are wrong.</p>
+<dl>
+<dt>+ positive · ± mixed · − negative · · no view</dt><dd>The view the post&rsquo;s writer takes. Many mentions take none: a link, a citation or a list.</dd>
+<dt>RECOMMENDS</dt><dd>The post recommends the book outright.</dd>
+<dt>SELF-RECOMMENDING</dt><dd>Tyler&rsquo;s shorthand for a book whose author or subject is reason enough to read it, usually said before he has read it. It counts as a recommendation.</dd>
+<dt>Read, not yet read</dt><dd>Whether the post says the writer has read the book. &ldquo;Not yet read&rdquo; also covers books not yet out.</dd>
+<dt>Quoted, or the writer&rsquo;s own book</dt><dd>Mentions where the post quotes someone else&rsquo;s view, and mentions of Tyler&rsquo;s or Alex&rsquo;s own books, are listed with the no-view mark. They aren&rsquo;t MR&rsquo;s evaluations, so they don&rsquo;t count toward one.</dd>
+<dt>Several mentions in one post</dt><dd>count as one. Its view is the one they state, or mixed if they differ, and it recommends the book if any of them does.</dd>
+</dl>
+<p><strong>The overall evaluation</strong> of a work weighs its counted mentions: a positive view counts one for the positive side, a negative view one for the negative side, and a mixed view half for each. A recommendation adds one to the positive side, and advice against reading it one to the negative. A side wins if it has at least twice the other&rsquo;s weight; otherwise the evaluation is mixed. Works with no stated view and no recommendation have no overall evaluation. Tyler&rsquo;s and Alex&rsquo;s own evaluations are the same rule over their mentions alone.</p>
+<h2 id="categories">The categories</h2>
+<p>Every work is shelved by form, subject, place and period, in one tree of 650 categories. The shelving is inferred, from library subject headings and a language model, and a work can sit on several shelves. The shelfmark on each card, like <span class="mono">NF · ECON.THOU · WORLD · 1945-1980</span>, is a short form of the main ones.</p>
+<h2 id="links">Sources and links</h2>
+<p>Every mention links to its post on marginalrevolution.com. Book data: <a href="https://openlibrary.org/">Open Library</a> and <a href="https://www.wikidata.org/">Wikidata</a>.</p>
+<h2 id="contact">Contact</h2>
+<p>Find an issue with a record? Is there a book mentioned on Marginal Revolution not listed here? Have something else to say? Reach out at <span class="email" data-u="hello" data-d="marginalia-library.com">hello [at] marginalia-library.com</span>.</p>
+</div>
+</main>
+<footer class="site-foot"><div class="wrap">
+<p>Marginalia Library is an independent catalog. It is not affiliated with Marginal Revolution, Tyler Cowen or Alex Tabarrok.</p>
+<p>Bibliographic data from Open Library and Wikidata. MR's evaluations and the categories are inferred: <a href="/about/#how">how</a>. Corrections and missing books: <a href="/about/#contact">contact</a>.</p>
+</div></footer>
+</body>
+</html>
