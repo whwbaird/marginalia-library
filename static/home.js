@@ -57,6 +57,12 @@
     }).catch(function () { button.disabled = false; });
   }
 
+  // The first card: a random one from the sample inline in the page (the page's own card stays without JavaScript).
+  try {
+    var sample = JSON.parse(document.getElementById('card-sample').textContent);
+    if (sample.length) render(sample[Math.floor(Math.random() * sample.length)]);
+  } catch (e) { /* keep the page's card */ }
+  slot.classList.remove('pending');
   button.hidden = false;
   button.addEventListener('click', pull);
 })();

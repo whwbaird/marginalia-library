@@ -329,7 +329,7 @@
       sum.textContent = [sum.textContent].concat(extra).filter(Boolean).join(' · ');
     }
     frag.appendChild(viewBox);
-    frag.appendChild(choiceFacet('Kind', 'kind', Object.keys(KINDS).map(function (k) {
+    frag.appendChild(choiceFacet('Work type', 'kind', Object.keys(KINDS).map(function (k) {
       return { label: KIND_LABEL[KINDS[k]], value: k, test: function (w) { return w.kind === KINDS[k]; } };
     }), 'kind'));
     frag.appendChild(rangeFacet('First published', 'from', 'to'));

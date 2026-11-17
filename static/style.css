@@ -167,6 +167,7 @@ i, em { font-style: italic; }
 .fields dt { width: 128px; flex: none; color: var(--muted); letter-spacing: 0.06em; }
 .fields dd { margin: 0; flex: 1 1 300px; min-width: 0; }
 .mini-card { padding: 14px 18px 18px; }
+.js #random-card.pending { visibility: hidden; }
 .mini-card .title { font-size: 23px; line-height: 1.2; text-decoration: none; }
 .mini-card .subtitle { font-size: 15px; margin-top: 2px; }
 .mini-card .byline { font-size: 15px; margin: 6px 0 0; }
@@ -310,7 +311,6 @@ details.year-block > summary { cursor: pointer; font-family: var(--mono); font-s
 .pattern-finding { margin: 14px 0 0; max-width: 780px; font-size: 21px; line-height: 1.45; }
 .pattern .pattern-lede { margin-top: 8px; font-size: 17px; color: var(--ink-2); }
 .pattern .pattern-body { max-width: none; }
-.to-top { margin: 18px 0 0; font-family: var(--mono); font-size: 14px; }
 .sort-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0 6px; }
 .sort-bar .label { margin-right: 4px; }
 .sort-bar button { border: 1px solid var(--ink); background: var(--card-white); font-family: var(--serif); font-size: 15px;
@@ -449,7 +449,7 @@ details.year-block > summary { cursor: pointer; font-family: var(--mono); font-s
 #author-results { margin-top: 6px; }
 #author-results .counts { min-width: 140px; }
 
-.catalog-lede { margin-top: -12px; max-width: 780px; font-family: var(--serif); font-size: 17px; line-height: 1.5;
+.catalog-lede { margin-top: -12px; font-family: var(--serif); font-size: 17px; line-height: 1.5;
   color: var(--ink-2); }
 
 /* ---------------------------------------------------------------- prose (About) */
