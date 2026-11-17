@@ -22,19 +22,19 @@
 <main id="main" class="wrap">
 <div class="prose">
 <h1 class="page-title">About the catalog</h1>
-<p class="lede">Data from August 2003 to October 2026 · built 2026-11-17</p>
+<p class="lede">Data from August 2003 to November 2026 · built 2026-11-17</p>
 <h2 id="what">What this is</h2>
-<p>Marginalia Library lists books mentioned on <a href="https://marginalrevolution.com/">Marginal Revolution</a>, the blog Tyler Cowen and Alex Tabarrok have written since 2003. It holds 7,952 works and 13,286 mentions of them, in 7,289 posts. Every work has a page with each of its mentions: the date, who wrote the post, MR&rsquo;s evaluation of the book, and the post&rsquo;s title, linked to the post itself.</p>
+<p>Marginalia Library lists books mentioned on <a href="https://marginalrevolution.com/">Marginal Revolution</a>, the blog Tyler Cowen and Alex Tabarrok have written since 2003. It holds 7,958 works and 13,303 mentions of them, in 7,300 posts. Every work has a page with each of its mentions: the date, who wrote the post, MR&rsquo;s evaluation of the book, and the post&rsquo;s title, linked to the post itself.</p>
 <p>It is an independent project. It is not affiliated with Marginal Revolution, Tyler Cowen or Alex Tabarrok.</p>
 <h2 id="how">How it was made</h2>
 <p>Language models did the reading, and a person checked their work at each step.</p>
 <ol>
-<li><strong>Finding the mentions.</strong> OpenAI&rsquo;s GPT-6 Luna read every post on the blog, about 40,000 of them, and listed each book a post mentions, whether by title, by description or in passing. A second pass checked that each one was a specific book, and not, say, a film or an article. For posts outside MR&rsquo;s Books category, Anthropic&rsquo;s Claude Sonnet 5.5 did that check, and also reread the posts that looked like they discussed a book but had nothing listed.</li>
-<li><strong>Linking each mention to a work.</strong> Each mention was matched to a record in Open Library or Wikidata: by search where the match was clear, and with Claude Opus 5.5 choosing among the candidates where it wasn&rsquo;t. A work is a book, or a series, a collection, a play, or a sacred text. Translations and new editions are linked to the original work. About 2,000 links were checked by hand. About 700 mentions couldn&rsquo;t be tied to a specific work, and aren&rsquo;t listed.</li>
+<li><strong>Finding the mentions.</strong> OpenAI&rsquo;s GPT-6 Luna read every post on the blog up to 20 October 2026, about 40,000 of them, and listed each book a post mentions, whether by title, by description or in passing. Anthropic&rsquo;s Claude Sonnet 5.5 reads the posts published since. A second pass checked that each one was a specific book, and not, say, a film or an article. For posts outside MR&rsquo;s Books category, Claude Sonnet 5.5 did that check, and also reread the posts that looked like they discussed a book but had nothing listed. Posts that MR marks as written by AI are left out.</li>
+<li><strong>Linking each mention to a work.</strong> Each mention was matched to a record in Open Library, Wikidata or the Library of Congress catalog: by search where the match was clear, and with Claude Sonnet 5.5 choosing among the candidates where it wasn&rsquo;t. A work is a book, or a series, a collection, a play, or a sacred text. Translations and new editions are linked to the original work. About 2,000 links were checked by hand. About 700 mentions couldn&rsquo;t be tied to a specific work, and aren&rsquo;t listed.</li>
 <li><strong>Shelving.</strong> Claude Sonnet 5.5 shelved each work by form, subject, place and period, starting from its library subject headings.</li>
 <li><strong>Evaluating.</strong> Claude Sonnet 5.5 read each mention in its post and labeled whose view it is, what the view is, whether the post recommends the book, and whether the writer has read it. About 650 mentions were labeled or checked by hand, and the hand labels take precedence.</li>
 </ol>
-<p>Bibliographic details (titles, authors, first publication years) come from Open Library and Wikidata, with hand corrections. Some are surely wrong; the catalog is meant to be corrected over time.</p>
+<p>Bibliographic details (titles, authors, first publication years) come from Open Library, Wikidata and the Library of Congress, with hand corrections. Some are surely wrong; the catalog is meant to be corrected over time.</p>
 <h2 id="evaluations">MR&rsquo;s evaluation of a book</h2>
 <p>Each mention is labeled with the view the post takes of the book. These labels are inferred from the post, and some are wrong.</p>
 <dl>
@@ -56,7 +56,7 @@
 </main>
 <footer class="site-foot"><div class="wrap">
 <p>Marginalia Library is an independent catalog. It is not affiliated with Marginal Revolution, Tyler Cowen or Alex Tabarrok.</p>
-<p>Bibliographic data from Open Library and Wikidata. MR's evaluations and the categories are inferred: <a href="/about/#how">how</a>. Corrections and missing books: <a href="/about/#contact">contact</a>.</p>
+<p>Bibliographic data from Open Library, Wikidata and the Library of Congress. MR's evaluations and the categories are inferred: <a href="/about/#how">how</a>. Corrections and missing books: <a href="/about/#contact">contact</a>.</p>
 </div></footer>
 </body>
 </html>
