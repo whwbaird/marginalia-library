@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Search · Marginalia Library</title>
+<meta name="description" content="Search and filter every book mentioned on Marginal Revolution.">
+<link rel="canonical" href="https://marginalia-library.com/search/">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/static/fonts/libre-caslon-text-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/style.css?v=832eb05189">
+<script src="/static/browse.js?v=832eb05189" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="site-head"><div class="wrap">
+<div class="brand"><a href="/">MARGINALIA LIBRARY</a><span>What Marginal Revolution has been reading since 2003</span></div>
+<nav class="site-nav" aria-label="Main"><a href="/catalog/">Catalog</a><a href="/search/" aria-current="page">Search</a><a href="/authors/">Authors</a><a href="/date/">Years</a><a href="/patterns/">Patterns</a><a href="/random/">Surprise me</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main id="main" class="wrap">
+<div class="section-head" style="margin-top: 22px"><h1>Search the catalog</h1><span class="note" id="browse-note">By title or author, and by subject, place, period, writer and evaluation</span></div>
+<noscript><p class="noscript">Search needs JavaScript. Without it, start from <a href="/catalog/">the catalog's drawers</a> or <a href="/authors/">the authors</a>.</p></noscript>
+<div class="browse" id="browse" data-src="/data/works.json">
+<form class="facets" id="facets" aria-label="Filters" onsubmit="return false">
+<div class="facet facet-search"><h2 class="label"><label for="bq">Title or author</label></h2><input id="bq" type="search" autocomplete="off" placeholder="Hayek, Middlemarch, the Ottomans" style="width: 100%; height: 44px; padding: 0 10px; border: 1px solid var(--slate); background: var(--card-white); font-family: var(--serif); font-size: 16px;"></div>
+<div id="facet-lists"><p class="fineprint">Loading the catalog…</p></div>
+</form>
+<section class="results" aria-labelledby="result-count">
+<div class="result-bar"><span class="count" id="result-count" aria-live="polite"></span>
+<label class="mono" style="font-size: 13px">Sort <select id="sort">
+<option value="recent">Most recent mention</option><option value="mentions">Most mentions</option>
+<option value="first">First mentioned</option><option value="title">Title</option>
+<option value="year-new">Published, newest</option><option value="year-old">Published, oldest</option>
+</select></label></div>
+<div class="chosen" id="chosen"></div>
+<ul class="rows work-rows" id="results"></ul>
+<button class="btn btn-quiet" type="button" id="more" hidden>SHOW 50 MORE</button>
+</section>
+</div>
+</main>
+<footer class="site-foot"><div class="wrap">
+<p>Marginalia Library is an independent catalog. It is not affiliated with Marginal Revolution, Tyler Cowen or Alex Tabarrok.</p>
+<p>Bibliographic data from Open Library and Wikidata. MR's evaluations and the categories are inferred: <a href="/about/#how">how</a>. Corrections and missing books: <a href="/about/#contact">contact</a>.</p>
+</div></footer>
+</body>
+</html>

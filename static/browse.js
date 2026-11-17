@@ -13,7 +13,30 @@
   var TREE_FACETS = ['topic', 'form', 'place', 'period'];
   var FACET_TITLE = { topic: 'Subject', form: 'Form', place: 'Place', period: 'Period' };
   var data, works, cats, slugOf = {}, catIndex = {};
-  var state = {}, shown = PAGE, expanded = {};
+  var state = {}, shown = PAGE, expanded = {}, open = {};  // open: filter groups the reader has opened
+
+  // A filter group: a heading that opens and closes it (closed to begin with, the user 2026-11-17), showing what is
+  // chosen in it while closed. Returns the box, with .body for its contents.
+  function facetBox(key, title, summary) {
+    var box = el('div', { 'class': 'facet' + (open[key] ? ' open' : '') });
+    var h = el('h2', { 'class': 'label' });
+    var b = el('button', { type: 'button', 'class': 'facet-toggle', 'aria-expanded': open[key] ? 'true' : 'false',
+                           'aria-controls': 'facet-' + key });
+    b.appendChild(el('span', { 'class': 'facet-title' }, title));
+    if (summary) b.appendChild(el('span', { 'class': 'facet-sum' }, summary));
+    b.addEventListener('click', function () {
+      open[key] = !open[key];
+      box.classList.toggle('open', open[key]);
+      b.setAttribute('aria-expanded', open[key] ? 'true' : 'false');
+      body.hidden = !open[key];
+    });
+    h.appendChild(b);
+    box.appendChild(h);
+    var body = el('div', { 'class': 'facet-body', id: 'facet-' + key, hidden: !open[key] });
+    box.appendChild(body);
+    box.body = body;
+    return box;
+  }
 
   function el(tag, attrs, text) {
     var node = document.createElement(tag);
@@ -183,8 +206,7 @@
   }
 
   function treeFacet(fc, set) {
-    var box = el('div', { 'class': 'facet' });
-    box.appendChild(el('h2', { 'class': 'label' }, FACET_TITLE[fc]));
+    var box = facetBox(fc, FACET_TITLE[fc], state.cat[fc] != null ? cats[state.cat[fc]].label : '');
     var ul = el('ul');
     var sel = state.cat[fc];
     var counts = {};
@@ -213,19 +235,19 @@
       inner.appendChild(option(cats[ci].label, counts[ci], false, function () { state.cat[fc] = ci; shown = PAGE; update(); }));
     });
     if (sel != null && opts.length) { var li = el('li'); li.appendChild(inner); ul.appendChild(li); }
-    box.appendChild(ul);
+    box.body.appendChild(ul);
     if (opts.length > limit) {
       var more = el('button', { type: 'button', 'class': 'expand' }, 'Show all ' + opts.length);
       more.addEventListener('click', function () { expanded[fc] = true; update(); });
-      box.appendChild(more);
+      box.body.appendChild(more);
     }
     return box;
   }
 
   function choiceFacet(title, key, choices, skip) {
     var base = works.filter(function (w) { return pass(w, skip); });
-    var box = el('div', { 'class': 'facet' });
-    box.appendChild(el('h2', { 'class': 'label' }, title));
+    var chosen = choices.filter(function (ch) { return state[key] === ch.value; })[0];
+    var box = facetBox(key, title, chosen ? chosen.label : '');
     var ul = el('ul');
     choices.forEach(function (ch) {
       var n = base.filter(ch.test).length;
@@ -234,13 +256,13 @@
         state[key] = on ? (key === 'view' ? null : '') : ch.value; shown = PAGE; update();
       }, !n && !on));
     });
-    box.appendChild(ul);
+    box.body.appendChild(ul);
     return box;
   }
 
   function rangeFacet(title, fromKey, toKey, min, max, asSelect) {
-    var box = el('div', { 'class': 'facet' });
-    box.appendChild(el('h2', { 'class': 'label' }, title));
+    var range = state[fromKey] || state[toKey] ? (state[fromKey] || '…') + '–' + (state[toKey] || '…') : '';
+    var box = facetBox(fromKey, title, range);
     var row = el('div', { 'class': 'row-pair' });
     function input(key, label) {
       var id = 'r-' + key;
@@ -259,7 +281,7 @@
     }
     input(fromKey, 'from');
     input(toKey, 'to');
-    box.appendChild(row);
+    box.body.appendChild(row);
     return box;
   }
 
@@ -285,14 +307,14 @@
     sel.value = state.viewer;
     sel.addEventListener('change', function () { state.viewer = sel.value; shown = PAGE; update(); });
     whose.appendChild(sel);
-    viewBox.appendChild(whose);
+    viewBox.body.appendChild(whose);
     var rec = el('label', { 'class': 'check' });
     var box = el('input', { type: 'checkbox' });
     box.checked = state.rec;
     box.addEventListener('change', function () { state.rec = box.checked; shown = PAGE; update(); });
     rec.appendChild(box);
     rec.appendChild(document.createTextNode(' Recommended at least once (' + fmt(works.filter(function (w) { return pass(w, 'rec') && w.recommend; }).length) + ')'));
-    viewBox.appendChild(rec);
+    viewBox.body.appendChild(rec);
     // Tyler's "self-recommending": the author or the subject is reason enough to read it
     var selfLabel = el('label', { 'class': 'check' });
     var selfBox = el('input', { type: 'checkbox' });
@@ -300,7 +322,12 @@
     selfBox.addEventListener('change', function () { state.selfrec = selfBox.checked; shown = PAGE; update(); });
     selfLabel.appendChild(selfBox);
     selfLabel.appendChild(document.createTextNode(' Called \u201cself-recommending\u201d (' + fmt(works.filter(function (w) { return pass(w, 'selfrec') && w.selfrec; }).length) + ')'));
-    viewBox.appendChild(selfLabel);
+    viewBox.body.appendChild(selfLabel);
+    var extra = [state.rec ? 'recommended' : '', state.selfrec ? 'self-recommending' : ''].filter(Boolean);
+    if (extra.length) {
+      var sum = viewBox.querySelector('.facet-sum') || viewBox.querySelector('.facet-toggle').appendChild(el('span', { 'class': 'facet-sum' }));
+      sum.textContent = [sum.textContent].concat(extra).filter(Boolean).join(' · ');
+    }
     frag.appendChild(viewBox);
     frag.appendChild(choiceFacet('Kind', 'kind', Object.keys(KINDS).map(function (k) {
       return { label: KIND_LABEL[KINDS[k]], value: k, test: function (w) { return w.kind === KINDS[k]; } };
